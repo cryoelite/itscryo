@@ -1,22 +1,62 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import { NAV_ITEMS, SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const {
+  title = SITE_TITLE,
+  description = SITE_DESCRIPTION,
+  currentPath = Astro.url.pathname,
+} = Astro.props;
+
+const pageTitle = title === SITE_TITLE ? SITE_TITLE : `${title} | ${SITE_TITLE}`;
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <BaseHead title={pageTitle} description={description} />
+  </head>
+  <body>
+    <div class="site-shell">
+      <div class="site-noise"></div>
+      <header class="site-header">
+        <a class="brand" href="/">
+          <span class="brand-mark">AS</span>
+          <span class="brand-copy">
+            <strong>{SITE_TITLE}</strong>
+            <span>Systems-oriented backend engineer</span>
+          </span>
+        </a>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+        <nav class="site-nav" aria-label="Primary">
+          {
+            NAV_ITEMS.map((item) => (
+              <a
+                href={item.href}
+                class:list={[currentPath === item.href && "is-active"]}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </header>
+
+      <main class="page">
+        <slot />
+      </main>
+
+      <footer class="site-footer">
+        <p>Backend engineer focused on systems, performance, and infrastructure.</p>
+        <p>Lucknow, India</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,11 +1,87 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/layout.astro";
+import {
+  CURRENTLY_EXPLORING,
+  FEATURED_PROJECTS,
+  HIGHLIGHTS,
+  SITE_DESCRIPTION,
+} from "../consts";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home" description={SITE_DESCRIPTION} currentPath="/">
+  <section class="hero">
+    <div class="eyebrow">Systems engineer profile</div>
+    <h1>Backend Engineer focused on systems, performance, and infrastructure</h1>
+    <p class="hero-copy">
+      Building high-performance backend systems in Rust, with experience across
+      distributed architectures, ML-backed products, and production
+      infrastructure.
+    </p>
+    <div class="cta-row">
+      <a class="button button-primary" href="/projects">View Projects</a>
+      <a class="button button-secondary" href="/systems">Read Systems Notes</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="section-label">Highlights</p>
+      <h2>Built around technical depth, not visual noise.</h2>
+    </div>
+    <div class="grid grid-4">
+      {
+        HIGHLIGHTS.map((item) => (
+          <article class="panel stat-card">
+            <p>{item}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="section-label">Featured Work</p>
+      <h2>Recent systems-heavy work across startup and consulting contexts.</h2>
+    </div>
+    <div class="grid grid-2">
+      {
+        FEATURED_PROJECTS.map((project) => (
+          <article class="panel project-card">
+            <div class="card-topline">
+              <h3>{project.title}</h3>
+              <span>{project.label}</span>
+            </div>
+            <p>{project.summary}</p>
+            <ul class="detail-list">
+              {project.bullets.map((bullet) => <li>{bullet}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section split-section">
+    <article class="panel prose-panel">
+      <p class="section-label">Philosophy</p>
+      <h2>I focus on understanding how systems actually work, not just using frameworks.</h2>
+      <p>
+        My work centers around performance and memory efficiency, concurrency
+        and async systems, and building reliable backend infrastructure.
+      </p>
+      <p>
+        I prefer solving problems at the systems level rather than stitching
+        together abstractions.
+      </p>
+    </article>
+
+    <article class="panel">
+      <p class="section-label">Currently Exploring</p>
+      <h2>Deeper fundamentals behind backend execution.</h2>
+      <ul class="detail-list">
+        {CURRENTLY_EXPLORING.map((item) => <li>{item}</li>)}
+      </ul>
+    </article>
+  </section>
 </Layout>

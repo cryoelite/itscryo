@@ -1,0 +1,58 @@
+---
+import Layout from "../layouts/layout.astro";
+import { PROJECTS } from "../consts";
+---
+
+<Layout
+  title="Projects"
+  description="Selected systems, backend, and infrastructure work by Arvind Sagar."
+  currentPath="/projects"
+>
+  <section class="page-intro">
+    <p class="eyebrow">Projects</p>
+    <h1>Selected systems, backend, and infrastructure work.</h1>
+    <p>
+      These projects are presented for architecture, execution, and technical
+      depth. The emphasis is on real systems, tradeoffs, and outcomes.
+    </p>
+  </section>
+
+  <section class="stacked-grid">
+    {
+      PROJECTS.map((project) => (
+        <article class="panel project-detail">
+          <div class="project-header">
+            <div>
+              <p class="section-label">Project</p>
+              <h2>{project.title}</h2>
+            </div>
+            <p class="project-summary">{project.description}</p>
+          </div>
+
+          <div class="project-columns">
+            <div>
+              <h3>Stack</h3>
+              <ul class="tag-list">
+                {project.stack.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+
+            <div>
+              <h3>Key Contributions</h3>
+              <ul class="detail-list">
+                {project.contributions.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+
+            <div>
+              <h3>Technical Depth</h3>
+              <ul class="detail-list">
+                {project.depth.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+</Layout>

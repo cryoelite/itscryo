@@ -1,0 +1,55 @@
+---
+import Layout from "../layouts/layout.astro";
+import { SYSTEM_NOTES } from "../consts";
+---
+
+<Layout
+  title="Systems Notes"
+  description="Systems writing and technical notes on runtimes, memory, and backend design."
+  currentPath="/systems"
+>
+  <section class="page-intro">
+    <p class="eyebrow">Systems Notes</p>
+    <h1>Writing that shows how I think about systems.</h1>
+    <p>
+      This section is about reasoning, not content marketing. Each note is
+      framed around context, problem definition, tradeoffs, and implementation
+      choices.
+    </p>
+  </section>
+
+  <section class="stacked-grid">
+    {
+      SYSTEM_NOTES.map((note) => (
+        <article class="panel note-card">
+          <div class="note-header">
+            <h2>{note.title}</h2>
+            <span>Draft topic</span>
+          </div>
+          <dl class="note-grid">
+            <div>
+              <dt>Context</dt>
+              <dd>{note.context}</dd>
+            </div>
+            <div>
+              <dt>Problem</dt>
+              <dd>{note.problem}</dd>
+            </div>
+            <div>
+              <dt>Approach</dt>
+              <dd>{note.approach}</dd>
+            </div>
+            <div>
+              <dt>Tradeoffs</dt>
+              <dd>{note.tradeoffs}</dd>
+            </div>
+            <div>
+              <dt>Takeaways</dt>
+              <dd>{note.takeaways}</dd>
+            </div>
+          </dl>
+        </article>
+      ))
+    }
+  </section>
+</Layout>
